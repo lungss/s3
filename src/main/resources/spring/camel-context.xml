@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="      http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       https://camel.apache.org/schema/spring/camel-spring.xsd">
+    <cxf:cxfEndpoint address="/s3" id="mycxf" serviceClass="org.example.s3.S3"/>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <endpoint id="be01req" uri="dozer:req?sourceModel=org.example.s3.Req&amp;targetModel=org.mycompany.Be01req&amp;mappingFile=be01req.xml"/>
+        <endpoint id="investReq" uri="dozer:req2?sourceModel=org.mycompany.Fields&amp;targetModel=org.mycompany.InvestReq&amp;mappingFile=investReq.xml"/>
+        <!--
+        <endpoint id="investReq" uri="dozer:req2?sourceModel=org.example.s3.Req&amp;targetModel=org.mycompany.InvestReq&amp;mappingFile=investReq.xml"/>
+        -->
+        <endpoint id="hrReq" uri="dozer:req2?sourceModel=org.mycompany.InvestRpl&amp;targetModel=org.mycompany.HrReq&amp;mappingFile=hrReq.xml"/>
+        <endpoint id="rpl" uri="dozer:response?sourceModel=org.mycompany.HrRpl&amp;targetModel=org.example.s3.Rpl&amp;mappingFile=rpl.xml"/>
+        <route id="s3">
+            <from id="cxf:bean:mycxf" uri="cxf:bean:mycxf"/>
+            <setProperty id="_setProperty1" propertyName="req">
+                <simple>body[0]</simple>
+            </setProperty>
+            <to id="_to1" uri="ref:be01req"/>
+            <marshal id="_marshal1">
+                <json library="Jackson"/>
+            </marshal>
+            <setHeader headerName="Content-Type" id="_setHeader1">
+                <constant>application/json</constant>
+            </setHeader>
+            <to id="_toBe01url" uri="netty4-http:http:jpos-client-3-jpos-client.ypopenshiftclustersg-603fa0c10f31856ac93884f4863c562d-0000.sng01.containers.appdomain.cloud:80/jpos/client"/>
+            <log id="_log1" message="1: ${body}"/>
+            <unmarshal id="_unmarshal1">
+                <json allowUnmarshallType="true" library="Jackson" unmarshalTypeName="org.mycompany.Fields"/>
+            </unmarshal>
+            <setProperty id="_setProperty1" propertyName="be01Rpl">
+                <simple>body</simple>
+            </setProperty>
+            <to id="_to2" uri="ref:investReq"/>
+            <marshal id="_marshal1">
+                <json library="Jackson"/>
+            </marshal>
+            <setHeader headerName="Content-Type" id="_setHeader1">
+                <constant>application/json</constant>
+            </setHeader>
+            <to id="_to2" uri="netty4-http:http:node-red-git-default.mycluster-na-d4a42c1d53effecb3a546f2cced5589b-0000.sjc03.containers.appdomain.cloud:80/fusetest"/>
+            <unmarshal id="_unmarshal1">
+                <json allowUnmarshallType="true" library="Jackson" unmarshalTypeName="org.mycompany.InvestRpl"/>
+            </unmarshal>
+            <setProperty id="_setProperty2" propertyName="investRpl">
+                <simple>body</simple>
+            </setProperty>
+            <to id="_to3" uri="ref:hrReq"/>
+            <marshal id="_marshal1">
+                <json library="Jackson"/>
+            </marshal>
+            <setHeader headerName="Content-Type" id="_setHeader1">
+                <constant>application/json</constant>
+            </setHeader>
+            <to id="_to4" uri="netty4-http:http:node-red-git-nodered.mycluster-179309-bee7ed7e116952c03f0e15cdb555fa9a-0000.sng01.containers.appdomain.cloud:80/hr"/>
+            <unmarshal id="_unmarshal2">
+                <json allowUnmarshallType="true" library="Jackson" unmarshalTypeName="org.mycompany.HrRpl"/>
+            </unmarshal>
+            <to id="_to5" uri="ref:rpl"/>
+            <log id="_logOut" message="Out: ${body}"/>
+        </route>
+    </camelContext>
+</beans>

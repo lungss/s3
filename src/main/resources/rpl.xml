@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mappings xmlns="http://dozermapper.github.io/schema/bean-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping https://dozermapper.github.io/schema/bean-mapping.xsd">
+    <configuration>
+        <wildcard>false</wildcard>
+    </configuration>
+    <mapping>
+        <class-a>org.mycompany.HrRpl</class-a>
+        <class-b>org.example.s3.Rpl</class-b>
+        <field>
+            <a>refId</a>
+            <b>refId</b>
+        </field>
+        <field>
+            <a>reqTime</a>
+            <b>reqTime</b>
+        </field>
+        <field>
+            <a>rplTime</a>
+            <b>rplTime</b>
+        </field>
+        <field>
+            <a>idNo</a>
+            <b>employeeProfile.idNo</b>
+        </field>
+        <field>
+            <a>employeeProfile.name</a>
+            <b>employeeProfile.name</b>
+        </field>
+        <field>
+            <a>employeeProfile.employeeNo</a>
+            <b>employeeProfile.employeeNo</b>
+        </field>
+        <field>
+            <a>employeeProfile.passportNo</a>
+            <b>employeeProfile.passportNo</b>
+        </field>
+        <field>
+            <a>employeeProfile.dob</a>
+            <b>employeeProfile.dob</b>
+        </field>
+        <field>
+            <a>employeeProfile.role</a>
+            <b>employeeProfile.role</b>
+        </field>
+        <field>
+            <a>employeeProfile.employmentDate</a>
+            <b>employeeProfile.employmentDate</b>
+        </field>
+        <field>
+            <a>employeeProfile.employmentStatus</a>
+            <b>employeeProfile.employmentStatus</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>org.apache.camel.component.dozer.ExpressionMapper</class-a>
+        <class-b>org.example.s3.Rpl</class-b>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field126_1}">
+            <a>expression</a>
+            <b>epfAccount.totalBalance</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field126_2}">
+            <a>expression</a>
+            <b>epfAccount.account1Balance</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field126_3}">
+            <a>expression</a>
+            <b>epfAccount.account2Balance</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_1}">
+            <a>expression</a>
+            <b>epfProfile.name</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_2}">
+            <a>expression</a>
+            <b>epfProfile.epfNo</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_3}">
+            <a>expression</a>
+            <b>epfProfile.idNo</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_4}">
+            <a>expression</a>
+            <b>epfProfile.passportNo</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_5}">
+            <a>expression</a>
+            <b>epfProfile.epfMembershipDate</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_6}">
+            <a>expression</a>
+            <b>epfProfile.iAkaunMembershipDate</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.be01Rpl.field71_7}">
+            <a>expression</a>
+            <b>epfProfile.iAkaunStatus</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.totalCurrentValue}">
+            <a>expression</a>
+            <b>investment.totalCurrentValue</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.totalUnrealisedValue}">
+            <a>expression</a>
+            <b>investment.totalUnrealisedValue</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.fundName}">
+            <a>expression</a>
+            <b>investment.fundName</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.totalInvestment}">
+            <a>expression</a>
+            <b>investment.totalInvestment</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.totalUnits}">
+            <a>expression</a>
+            <b>investment.totalUnits</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.unitNav}">
+            <a>expression</a>
+            <b>investment.unitNav</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.currentValue}">
+            <a>expression</a>
+            <b>investment.currentValue</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.unrealisedValue}">
+            <a>expression</a>
+            <b>investment.unrealisedValue</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.investRpl.investment.unrealisedValuePercentage}">
+            <a>expression</a>
+            <b>investment.unrealisedValuePercentage</b>
+        </field>
+    </mapping>
+</mappings>

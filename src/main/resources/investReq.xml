@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mappings xmlns="http://dozermapper.github.io/schema/bean-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping https://dozermapper.github.io/schema/bean-mapping.xsd">
+    <configuration>
+        <wildcard>false</wildcard>
+    </configuration>
+    <mapping>
+        <class-a>org.apache.camel.component.dozer.ExpressionMapper</class-a>
+        <class-b>org.mycompany.InvestReq</class-b>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.req.refId}">
+            <a>expression</a>
+            <b>refId</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.req.reqTime}">
+            <a>expression</a>
+            <b>reqTime</b>
+        </field>
+        <field custom-converter-id="_expressionMapping" custom-converter-param="simple:\${property.req.idNo}">
+            <a>expression</a>
+            <b>idNo</b>
+        </field>
+	</mapping>
+</mappings>

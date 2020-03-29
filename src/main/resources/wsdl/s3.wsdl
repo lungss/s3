@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/s3/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="s3" targetNamespace="http://www.example.org/s3/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/s3/">
+      <xsd:element name="req">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="refId" type="xsd:string"/>
+            <xsd:element name="reqTime" type="xsd:string"/>
+            <xsd:element name="idNo" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="rpl">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="refId" type="xsd:string"/>
+            <xsd:element name="reqTime" type="xsd:string"/>
+            <xsd:element name="rplTime" type="xsd:string"/>
+            <xsd:element name="epfAccount">
+              <xsd:complexType>
+                <xsd:sequence>
+                	<xsd:element name="totalBalance" type="xsd:string"/>
+                	<xsd:element name="account1Balance" type="xsd:string"/>
+                	<xsd:element name="account2Balance" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="epfProfile">
+              <xsd:complexType>
+                <xsd:sequence>
+                	<xsd:element name="name" type="xsd:string"/>
+                	<xsd:element name="epfNo" type="xsd:string"/>
+                	<xsd:element name="idNo" type="xsd:string"/>
+                	<xsd:element name="passportNo" type="xsd:string"/>
+                	<xsd:element name="dob" type="xsd:string"/>
+                	<xsd:element name="race" type="xsd:string"/>
+                	<xsd:element name="religion" type="xsd:string"/>
+                	<xsd:element name="epfMembershipDate" type="xsd:string"/>
+                	<xsd:element name="iAkaunMembershipDate" type="xsd:string"/>
+                	<xsd:element name="iAkaunStatus" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="investment">
+              <xsd:complexType>
+                <xsd:sequence>
+                	<xsd:element name="totalCurrentValue" type="xsd:string"/>
+                	<xsd:element name="totalUnrealisedValue" type="xsd:string"/>
+                	<xsd:element name="fundName" type="xsd:string"/>
+                	<xsd:element name="totalInvestment" type="xsd:string"/>
+                	<xsd:element name="totalUnits" type="xsd:string"/>
+                	<xsd:element name="unitNav" type="xsd:string"/>
+                	<xsd:element name="currentValue" type="xsd:string"/>
+                	<xsd:element name="unrealisedValue" type="xsd:string"/>
+                	<xsd:element name="unrealisedValuePercentage" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="employeeProfile">
+              <xsd:complexType>
+                <xsd:sequence>
+                	<xsd:element name="name" type="xsd:string"/>
+                	<xsd:element name="employeeNo" type="xsd:string"/>
+                	<xsd:element name="idNo" type="xsd:string"/>
+                	<xsd:element name="passportNo" type="xsd:string"/>
+                	<xsd:element name="dob" type="xsd:string"/>
+                	<xsd:element name="role" type="xsd:string"/>
+                	<xsd:element name="employmentDate" type="xsd:string"/>
+                	<xsd:element name="employmentStatus" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="s3OperationRequest">
+    <wsdl:part element="tns:req" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="s3OperationResponse">
+    <wsdl:part element="tns:rpl" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="s3">
+    <wsdl:operation name="s3Operation">
+      <wsdl:input message="tns:s3OperationRequest"/>
+      <wsdl:output message="tns:s3OperationResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="s3SOAP" type="tns:s3">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="s3Operation">
+      <soap:operation soapAction="http://www.example.org/s3/s3Operation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="s3">
+    <wsdl:port binding="tns:s3SOAP" name="s3SOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
